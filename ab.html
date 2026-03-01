@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Meruert! 🎉</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background: linear-gradient(-45deg, #ff6b9d, #c06c84, #6c5b7b, #355c7d);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            padding: 20px;
+            max-width: 900px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .content {
+            text-align: left;
+        }
+
+        .photo-section {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .photo-frame {
+            position: relative;
+            width: 100%;
+            max-width: 350px;
+            aspect-ratio: 3/4;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            animation: photoFloat 3s ease-in-out infinite;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes photoFloat {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .photo-frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.15), rgba(192, 108, 132, 0.05));
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .photo-glow {
+            position: absolute;
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle, rgba(255, 107, 157, 0.3) 0%, transparent 70%);
+            top: -10%;
+            left: -10%;
+            border-radius: 50%;
+            animation: glow 4s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 40px rgba(255, 107, 157, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 80px rgba(192, 108, 132, 0.8);
+            }
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            animation: fadeInDown 1.5s ease;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 30px;
+            font-weight: 300;
+            animation: fadeInUp 1.5s ease;
+        }
+
+        .btn-surprise {
+            padding: 18px 45px;
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, #ff6b9d, #c06c84);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            font-weight: 600;
+            letter-spacing: 1px;
+            animation: fadeInUp 1.8s ease;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+
+        .btn-surprise:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-surprise:active {
+            transform: translateY(-1px);
+        }
+
+        .message-box {
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            pointer-events: none;
+            margin-top: 0;
+        }
+
+        .message-box.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .message-text {
+            font-size: 1.1rem;
+            color: #6c5b7b;
+            line-height: 1.8;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .emoji-section {
+            font-size: 2rem;
+            margin-top: 12px;
+        }
+
+        /* Floating Hearts Animation */
+        .heart {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            pointer-events: none;
+            animation: float-up 4s ease-in forwards;
+            z-index: 1;
+        }
+
+        @keyframes float-up {
+            0% {
+                opacity: 1;
+                transform: translateY(0) translateX(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) translateX(100px) scale(0.5);
+            }
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            pointer-events: none;
+            animation: confetti-fall 3s linear forwards;
+            z-index: 5;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotateZ(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotateZ(720deg);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .content {
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 2.8rem;
+            }
+
+            .photo-frame {
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .btn-surprise {
+                padding: 15px 35px;
+                font-size: 1rem;
+            }
+
+            .message-text {
+                font-size: 1rem;
+            }
+
+            .emoji-section {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+                gap: 20px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .subtitle {
+                font-size: 0.9rem;
+            }
+
+            .btn-surprise {
+                padding: 12px 30px;
+                font-size: 0.95rem;
+            }
+
+            .message-text {
+                font-size: 0.95rem;
+            }
+
+            .photo-frame {
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <h1>🎉 Happy Birthday 🎉</h1>
+            <p class="subtitle">Meruyert! ✨</p>
+            <button class="btn-surprise" onclick="revealSurprise()">Open Your Surprise 🎁</button>
+            
+            <div class="message-box" id="messageBox">
+                <p class="message-text">
+                    Happy Birthday, Meruert! 🎉✨
+                </p>
+                <p class="message-text">
+                    May your life be full of happiness, love and beautiful moments.
+                </p>
+                <div class="emoji-section">💝 🌸 ✨ 🌹 💖</div>
+            </div>
+        </div>
+
+        <div class="photo-section">
+            <div class="photo-glow"></div>
+            <div class="photo-frame">
+                <img id="birthdayPhoto" src="" alt="Meruert in Pink Dress">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Загрузка фото из переменной или URL
+        function loadPhoto() {
+            const img = document.getElementById('birthdayPhoto');
+            // Замени это на URL твоей фотографии или выложи фото в интернет
+            img.src = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwwDAwwGEAwMGBAwNDA5MSExNQorNDk4Nzc0PkRBRExTM0w3WVhHTkxUVVNGYoD/2wBDAQICAgMDAwYDAwYMCAcIDAwIDAwwDAwMDAwwNDA5MSExNQorNDk4Nzc0PkRBRExTM0w3WVhHTkxUVVNGYoD/wAARCABkAVgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWm5ygnKKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9/KKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/2Q==';
+        }
+
+        window.addEventListener('load', loadPhoto);
+
+        function revealSurprise() {
+            const messageBox = document.getElementById('messageBox');
+            messageBox.classList.add('show');
+            
+            createConfetti();
+            createFloatingHearts();
+        }
+
+        function createConfetti() {
+            const confettiCount = 50;
+            const colors = ['#ff6b9d', '#c06c84', '#6c5b7b', '#355c7d', '#ffd89b'];
+            
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 0.3 + 's';
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 3300);
+            }
+        }
+
+        function createFloatingHearts() {
+            const heartCount = 20;
+            const hearts = ['❤️', '💖', '💝', '🌹'];
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.bottom = '-20px';
+                heart.style.fontSize = Math.random() * 10 + 20 + 'px';
+                heart.style.animationDelay = Math.random() * 0.3 + 's';
+                document.body.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 4300);
+            }
+        }
+
+        window.addEventListener('load', () => {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.textContent = ['❤️', '💖', '💝'][Math.floor(Math.random() * 3)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.bottom = '-20px';
+                heart.style.fontSize = Math.random() * 8 + 15 + 'px';
+                heart.style.opacity = '0.6';
+                document.body.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 4500);
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
